@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <title>DevForge V2 — AI App Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">&lt;/&gt;</div>
+      <div><strong>DevForge V2</strong><span>AI App Builder</span></div>
+    </div>
+    <div class="top-actions">
+      <button id="settingsBtn" class="ghost">⚙ AI Setup</button><button id="newBtn" class="ghost">New</button>
+      <button id="saveBtn" class="ghost">Save</button>
+      <button id="exportBtn" class="primary">Export</button>
+    </div>
+  </header>
+
+  <main class="app">
+    <section class="builder card">
+      <div class="section-title">
+        <div><small>BUILD WITH A PROMPT</small><h1>What do you want to make?</h1></div>
+        <span id="status" class="status">Ready</span>
+      </div>
+      <div class="prompt-row">
+        <textarea id="prompt" rows="3" placeholder="Example: Make a study timer with XP, streaks and dark mode"></textarea>
+        <button id="generateBtn" class="primary big">⚡ Generate</button>
+      </div>
+      <div class="chips">
+        <button data-template="study">Study Timer</button>
+        <button data-template="calculator">Calculator</button>
+        <button data-template="quiz">Quiz App</button>
+        <button data-template="portfolio">Portfolio</button>
+        <button data-template="game">Mini Game</button>
+      </div>
+      <p class="hint">V2 supports a real AI backend through your own secure endpoint. Without one, Smart Demo mode still works locally.</p>
+    </section>
+
+    <section class="workspace">
+      <div class="editor card">
+        <div class="panelbar">
+          <div class="tabs">
+            <button class="tab active" data-tab="html">HTML</button>
+            <button class="tab" data-tab="css">CSS</button>
+            <button class="tab" data-tab="js">JS</button>
+          </div>
+          <div>
+            <button id="fixBtn" class="ghost small">✨ Fix code</button>
+            <button id="runBtn" class="primary small">▶ Run</button>
+          </div>
+        </div>
+        <textarea id="htmlEditor" class="code active" spellcheck="false"></textarea>
+        <textarea id="cssEditor" class="code" spellcheck="false"></textarea>
+        <textarea id="jsEditor" class="code" spellcheck="false"></textarea>
+        <div class="console">
+          <div class="console-head"><span>Console</span><button id="clearConsole">Clear</button></div>
+          <pre id="consoleOutput">DevForge console ready.</pre>
+        </div>
+      </div>
+
+      <div class="preview card">
+        <div class="panelbar">
+          <strong>Live Preview</strong>
+          <div class="device-switch">
+            <button data-width="390" class="active">📱</button>
+            <button data-width="768">▣</button>
+            <button data-width="100%">🖥</button>
+          </div>
+        </div>
+        <div class="preview-stage">
+          <iframe id="previewFrame" sandbox="allow-scripts allow-forms allow-modals"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects card">
+      <div class="section-title compact"><div><small>LOCAL STORAGE</small><h2>Your projects</h2></div><button id="deleteAllBtn" class="danger ghost">Delete all</button></div>
+      <div id="projectList" class="project-list"></div>
+    </section>
+  </main>
+  <dialog id="settingsDialog">
+    <form method="dialog" class="settings-card">
+      <div class="settings-head"><h2>AI Setup</h2><button value="cancel">✕</button></div>
+      <p>For a public GitHub Pages site, never paste a secret AI API key into this code. Connect DevForge to a serverless endpoint instead.</p>
+      <label>AI endpoint URL</label>
+      <input id="endpointInput" placeholder="https://your-worker.example.com/generate">
+      <label>Optional access token</label>
+      <input id="tokenInput" type="password" placeholder="Token for your own backend">
+      <div class="settings-actions"><button id="clearAiBtn" type="button" class="ghost">Use Demo Mode</button><button id="saveAiBtn" type="button" class="primary">Save Connection</button></div>
+      <small>Your endpoint should accept POST JSON { prompt, currentCode } and return JSON { html, css, js, name }.</small>
+    </form>
+  </dialog>
+
+  <footer>DevForge V2 · AI-ready browser app builder</footer>
+  <script src="script.js"></script>
+</body>
+</html>
